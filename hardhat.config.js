@@ -6,8 +6,8 @@ module.exports = {
     hardhat: {
     },
     sepolia: {
-      url: `https://eth-sepolia.g.alchemy.com/v2/qsmBqL-17wbolk3wYM-Lw4QkMhZzinqb`,
-      accounts: ['1efa61372264b615f88b5c77935a43b074a66dd68a43ccb5c3eaf917918e6d44']
+      url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.API_KEY}`,
+      accounts: [process.env.PRIVATE_KEY]
     }
   },
   solidity: "0.8.4",
