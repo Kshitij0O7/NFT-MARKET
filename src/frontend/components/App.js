@@ -22,11 +22,14 @@ function App() {
 
   const web3Handler = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    console.log(accounts[0])
     setAccount(accounts[0])
+    // console.log(account)
     // Get provider from Metamask
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     // Set signer
     const signer = provider.getSigner()
+    console.log(signer)
     //const signer = "0x691721E909f0C10533E7359C3d9f7145C07AF590";
 
     window.ethereum.on('chainChanged', (chainId) => {

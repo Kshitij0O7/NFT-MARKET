@@ -1,14 +1,41 @@
 import { useState } from 'react'
 import { ethers } from "ethers"
 import { Row, Form, Button } from 'react-bootstrap'
-import { create as ipfsHttpClient } from 'ipfs-http-client'
-const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
+import { create as ipfsClient } from 'ipfs-http-client'
+// import { add } from 'ipfs-http-client'
+import { Buffer } from 'buffer'
+// import ipfsClient from ''
+// import { NFTStorage } from 'nft.storage'
+
+const projectId = "2DUaCZ8K8KVdawmS02EPdAapZef";
+const projectSecret = "9e69e61878204d83fad4706df96e885f";
+
+const auth =
+  "Basic " + Buffer.from(projectId + ":" + projectSecret).toString('base64');
+const client = ipfsClient({
+    host: "ipfs.infura.io",
+    port: 5001,
+    protocol: 'https',
+    headers: {
+        authorization: auth,
+    },
+});
+
+// const options = {
+//   host: "ipfs.infura.io",
+//   port: 5001,
+//   path: "/api/v0/pin/add?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn",
+//   method: "POST",
+//   auth: projectId + ":" + projectSecret,
+// };
+// const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 const Create = ({ marketplace, nft }) => {
   const [image, setImage] = useState('')
   const [price, setPrice] = useState(null)
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
+
   const uploadToIPFS = async (event) => {
     event.preventDefault()
     const file = event.target.files[0]
@@ -22,15 +49,21 @@ const Create = ({ marketplace, nft }) => {
       }
     }
   }
+
   const createNFT = async () => {
+    // console.log('1');
     if (!image || !price || !name || !description) return
     try{
       const result = await client.add(JSON.stringify({image, price, name, description}))
+      console.log(result.path)
+      
       mintThenList(result)
+    
     } catch(error) {
       console.log("ipfs uri upload error: ", error)
     }
   }
+
   const mintThenList = async (result) => {
     const uri = `https://ipfs.infura.io/ipfs/${result.path}`
     // mint nft 

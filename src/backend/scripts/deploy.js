@@ -1,10 +1,10 @@
 async function main() {
 
-  const [deployer] = await ethers.getSigners();
-  //const deployer = "0x691721E909f0C10533E7359C3d9f7145C07AF590";
+  // const [deployer] = await ethers.getSigners();
+  const deployer = "0x522Eca2Ba84f98355684aA3335A81cf9126adBE8";
 
-  console.log("Deploying contracts with the account:", deployer.address);
-  console.log("Account balance:", (await deployer.getBalance()).toString());
+  console.log("Deploying contracts with the account:", deployer);
+  // console.log("Account balance:", (await deployer.getBalance()).toString());
 
   const NFT = await ethers.getContractFactory("NFT");
   const nft = await NFT.deploy();

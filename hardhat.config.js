@@ -1,14 +1,15 @@
 require("@nomiclabs/hardhat-waffle");
+require('dotenv').config();
 module.exports = {
   // defaultNetwork: 'matic',
-  // networks: {
-  //   hardhat: {
-  //   },
-  //   matic: {
-  //     url: "https://polygon-mumbai.g.alchemy.com/v2/u6BkPZO36a94O_-G3MH3-72ontYgrkQk",
-  //     accounts: ["2407d2a5851f4166d9a909deb312c288691eb7afbba62004f09920662fbcebcc"]
-  //   }
-  // },
+  networks: {
+    hardhat: {
+    },
+    sepolia: {
+      url: `https://eth-sepolia.g.alchemy.com/v2/qsmBqL-17wbolk3wYM-Lw4QkMhZzinqb`,
+      accounts: ['1efa61372264b615f88b5c77935a43b074a66dd68a43ccb5c3eaf917918e6d44']
+    }
+  },
   solidity: "0.8.4",
   paths: {
     artifacts: "./src/backend/artifacts",
